@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Centro Financiero</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" height="30">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="productosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Productos
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="productosDropdown">
+                            <li><a class="dropdown-item" href="#">Análisis de TC</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Beneficios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Ayuda</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <a href="#" class="btn btn-outline-primary me-2">Registrarse</a>
+                    <a href="https://multi-dashboard-app-service-543790252426.southamerica-west1.run.app/" class="btn btn-primary">Iniciar Sesión</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div id="mainCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{{ url_for('static', filename='img/carousel/image1.jpg') }}" class="d-block w-100" alt="Promoción 1">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Promoción Especial</h5>
+                    <p>Descubre nuestras ofertas exclusivas para ti.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="{{ url_for('static', filename='img/carousel/image2.jpg') }}" class="d-block w-100" alt="Promoción 2">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Nuevos Productos</h5>
+                    <p>Conoce nuestros nuevos servicios financieros.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="{{ url_for('static', filename='img/carousel/image3.jpg') }}" class="d-block w-100" alt="Promoción 3">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Atención Personalizada</h5>
+                    <p>Estamos aquí para ayudarte en cada paso.</p>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Anterior</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Siguiente</span>
+        </button>
+    </div>
+
+    <footer class="bg-light py-4 mt-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <h5>Canales Digitales</h5>
+                    <p>Haz tus operaciones desde el app y la web.</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Llámanos</h5>
+                    <p>01 311 6000 (Lima)<br>0 801 1 6000 (Provincia)</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Conversemos en Facebook</h5>
+                    <p>Resolvemos tus consultas en @ScotiabankPE</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Comparte tus ideas</h5>
+                    <p>Co-creemos el futuro de la banca juntos.</p>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-12 text-center">
+                    <a href="#" class="me-3"><img src="{{ url_for('static', filename='img/facebook-icon.png') }}" alt="Facebook" height="24"></a>
+                    <a href="#" class="me-3"><img src="{{ url_for('static', filename='img/twitter-icon.png') }}" alt="Twitter" height="24"></a>
+                    <a href="#" class="me-3"><img src="{{ url_for('static', filename='img/youtube-icon.png') }}" alt="YouTube" height="24"></a>
+                    <a href="#" class="me-3"><img src="{{ url_for('static', filename='img/linkedin-icon.png') }}" alt="LinkedIn" height="24"></a>
+                    <a href="#"><img src="{{ url_for('static', filename='img/instagram-icon.png') }}" alt="Instagram" height="24"></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+# app/static/css/style.css
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+}
+
+.carousel-item img {
+    height: 400px;
+    object-fit: cover;
+}
+
+footer {
+    box-shadow: 0 -2px 4px rgba(0,0,0,.1);
+}

@@ -1,0 +1,21 @@
+landing-page/
+│
+├── app/
+│   ├── __init__.py
+│   ├── main.py
+│   ├── routes.py
+│   ├── templates/
+│   │   └── index.html
+│   └── static/
+│       ├── css/
+│       │   └── style.css
+│       ├── js/
+│       │   └── main.js
+│       └── img/
+│           ├── logo.png
+│           └── carousel/
+│               ├── image1.jpg
+│               ├── image2.jpg
+│               └── image3.jpg
+├── requirements.txt
+└── Dockerfile
