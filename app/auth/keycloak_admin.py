@@ -4,18 +4,21 @@ from keycloak.exceptions import KeycloakGetError
 import requests
 import json
 import logging
+from google.cloud import storage
 
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 class KeycloakAdminClient:
-    def __init__(self, server_url, realm_name, client_id, client_secret, token_uri):
+    def __init__(self, server_url, realm_name, client_id, client_secret, token_uri, gcs_bucket_name):
         self.server_url = server_url
         self.realm_name = realm_name
         self.client_id = client_id
         self.client_secret = client_secret
         self.token_uri = token_uri
         self.keycloak_admin = None
+        self.gcs_bucket_name = gcs_bucket_name
+        self.gcs_client = storage.Client()
 
     def _get_admin_token(self):
         data = {
@@ -69,10 +72,27 @@ class KeycloakAdminClient:
                 }]
             })
             logger.debug(f"New user created: {new_user}")
-            return True, "User created successfully"
+            
+            # Get the user ID from Keycloak
+            user_id = self.keycloak_admin.get_user_id(username)
+            
+            # Create a folder in Google Cloud Storage
+            self.create_gcs_folder(user_id)
+            
+            return True, "User created successfully and GCS folder created"
         except KeycloakGetError as e:
             logger.error(f"Keycloak error: {str(e)}")
             return False, f"Keycloak error: {str(e)}"
         except Exception as e:
             logger.error(f"Unexpected error: {str(e)}", exc_info=True)
             return False, f"Unexpected error: {str(e)}"
+
+    def create_gcs_folder(self, folder_name):
+        try:
+            bucket = self.gcs_client.get_bucket(self.gcs_bucket_name)
+            blob = bucket.blob(f"{folder_name}/")
+            blob.upload_from_string('')
+            logger.debug(f"Created GCS folder: {folder_name}")
+        except Exception as e:
+            logger.error(f"Error creating GCS folder: {str(e)}", exc_info=True)
+            raise

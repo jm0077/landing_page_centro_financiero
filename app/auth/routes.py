@@ -18,7 +18,8 @@ def register():
                     realm_name=current_app.config['KEYCLOAK_REALM_NAME'],
                     client_id=current_app.config['KEYCLOAK_CLIENT_ID'],
                     client_secret=current_app.config['KEYCLOAK_CLIENT_SECRET'],
-                    token_uri=current_app.config['KEYCLOAK_TOKEN_URI']
+                    token_uri=current_app.config['KEYCLOAK_TOKEN_URI'],
+                    gcs_bucket_name=current_app.config['GCS_BUCKET_NAME']
                 )
                 
                 success, message = keycloak_admin.create_user(
