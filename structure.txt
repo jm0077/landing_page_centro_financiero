@@ -4,8 +4,15 @@ landing-page/
 │   ├── __init__.py
 │   ├── main.py
 │   ├── routes.py
+│   ├── auth/
+│   │   ├── __init__.py
+│   │   ├── routes.py
+│   │   ├── forms.py
+│   │   └── keycloak_admin.py
 │   ├── templates/
-│   │   └── index.html
+│   │   ├── index.html
+│   │   ├── register.html
+│   │   └── register_success.html
 │   └── static/
 │       ├── css/
 │       │   └── style.css
@@ -17,5 +24,7 @@ landing-page/
 │               ├── image1.jpg
 │               ├── image2.jpg
 │               └── image3.jpg
+├── config.py
+├── client_secrets.json
 ├── requirements.txt
 └── Dockerfile
