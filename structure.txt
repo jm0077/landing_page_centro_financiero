@@ -9,6 +9,9 @@ landing-page/
 │   │   ├── routes.py
 │   │   ├── forms.py
 │   │   └── keycloak_admin.py
+│   ├── database/
+│   │   ├── __init__.py
+│   │   └── db_operations.py
 │   ├── templates/
 │   │   ├── index.html
 │   │   ├── register.html

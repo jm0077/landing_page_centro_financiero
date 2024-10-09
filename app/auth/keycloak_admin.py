@@ -5,6 +5,7 @@ import requests
 import json
 import logging
 from google.cloud import storage
+from ..database.db_operations import insert_user_in_bank
 
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
@@ -79,7 +80,13 @@ class KeycloakAdminClient:
             # Create a folder in Google Cloud Storage
             self.create_gcs_folder(user_id)
             
-            return True, "User created successfully and GCS folder created"
+            # Insert user in bank database
+            if insert_user_in_bank(user_id):
+                logger.info(f"User {user_id} inserted in bank database successfully")
+            else:
+                logger.error(f"Failed to insert user {user_id} in bank database")
+            
+            return True, "User created successfully, GCS folder created, and user inserted in bank database"
         except KeycloakGetError as e:
             logger.error(f"Keycloak error: {str(e)}")
             return False, f"Keycloak error: {str(e)}"

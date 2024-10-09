@@ -19,6 +19,14 @@ class Config:
     KEYCLOAK_REDIRECT_URI = client_secrets['web']['redirect_uris'][0]
     KEYCLOAK_TOKEN_URI = client_secrets['web']['token_uri']
     GCS_BUCKET_NAME = 'custom-curve-431820-e9_cloudbuild'
+    
+    # Database configuration
+    DB_USER = 'jm_07'
+    DB_PASS = '12345'
+    DB_NAME = 'dashboard_db'
+    CLOUD_SQL_CONNECTION_NAME = 'custom-curve-431820-e9:southamerica-west1:my-mysql-instance'
+    SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{DB_USER}:{DB_PASS}@/{DB_NAME}?unix_socket=/cloudsql/{CLOUD_SQL_CONNECTION_NAME}"
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     logger.debug(f"KEYCLOAK_SERVER_URL: {KEYCLOAK_SERVER_URL}")
     logger.debug(f"KEYCLOAK_REALM_NAME: {KEYCLOAK_REALM_NAME}")
@@ -26,3 +34,4 @@ class Config:
     logger.debug(f"KEYCLOAK_REDIRECT_URI: {KEYCLOAK_REDIRECT_URI}")
     logger.debug(f"KEYCLOAK_TOKEN_URI: {KEYCLOAK_TOKEN_URI}")
     logger.debug(f"GCS_BUCKET_NAME: {GCS_BUCKET_NAME}")
+    logger.debug(f"SQLALCHEMY_DATABASE_URI: {SQLALCHEMY_DATABASE_URI}")
