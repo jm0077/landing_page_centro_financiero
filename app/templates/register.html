@@ -10,13 +10,6 @@
 <body>
     <div class="container mt-5">
         <h2>Registro de Usuario</h2>
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                    <div class="alert alert-{{ category }}">{{ message }}</div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
         <form method="POST" action="{{ url_for('auth.register') }}">
             {{ form.hidden_tag() }}
             <div class="mb-3">
@@ -44,6 +37,7 @@
                 {{ form.confirm_password(class="form-control") }}
             </div>
             {{ form.submit(class="btn btn-primary") }}
+            <a href="{{ url_for('main.index') }}" class="btn btn-secondary">Volver</a>
         </form>
     </div>
 
