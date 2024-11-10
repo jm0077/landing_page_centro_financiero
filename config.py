@@ -18,13 +18,13 @@ class Config:
     KEYCLOAK_CLIENT_SECRET = client_secrets['web']['client_secret']
     KEYCLOAK_REDIRECT_URI = client_secrets['web']['redirect_uris'][0]
     KEYCLOAK_TOKEN_URI = client_secrets['web']['token_uri']
-    GCS_BUCKET_NAME = 'custom-curve-431820-e9_cloudbuild'
+    GCS_BUCKET_NAME = 'account-statements_customers'
     
     # Database configuration
     DB_USER = 'jm_07'
     DB_PASS = '12345'
     DB_NAME = 'dashboard_db'
-    CLOUD_SQL_CONNECTION_NAME = 'custom-curve-431820-e9:southamerica-west1:my-mysql-instance'
+    CLOUD_SQL_CONNECTION_NAME = 'quick-bonfire-441017-v2:southamerica-west1:my-mysql-instance'
     SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{DB_USER}:{DB_PASS}@/{DB_NAME}?unix_socket=/cloudsql/{CLOUD_SQL_CONNECTION_NAME}"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
