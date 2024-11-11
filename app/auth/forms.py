@@ -5,20 +5,36 @@ from wtforms.validators import DataRequired, Email, EqualTo, Length, ValidationE
 import re
 
 class RegistrationForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired(), Length(min=4, max=20)])
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    first_name = StringField('First Name', validators=[DataRequired()])
-    last_name = StringField('Last Name', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired(), Length(min=6)])
-    confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
-    submit = SubmitField('Register')
+    username = StringField('Usuario', validators=[
+        DataRequired(message="El nombre de usuario es obligatorio"),
+        Length(min=4, max=20, message="El nombre de usuario debe tener entre 4 y 20 caracteres")
+    ])
+    email = StringField('Correo electrónico', validators=[
+        DataRequired(message="El correo electrónico es obligatorio"),
+        Email(message="Por favor, introduce una dirección de correo válida")
+    ])
+    first_name = StringField('Nombre', validators=[
+        DataRequired(message="El nombre es obligatorio")
+    ])
+    last_name = StringField('Apellido', validators=[
+        DataRequired(message="El apellido es obligatorio")
+    ])
+    password = PasswordField('Contraseña', validators=[
+        DataRequired(message="La contraseña es obligatoria"),
+        Length(min=6, message="La contraseña debe tener al menos 6 caracteres")
+    ])
+    confirm_password = PasswordField('Confirmar Contraseña', validators=[
+        DataRequired(message="Por favor, confirma tu contraseña"),
+        EqualTo('password', message="Las contraseñas deben coincidir")
+    ])
+    submit = SubmitField('Registrarse')
 
     def validate_password(self, field):
         if not re.search(r'[A-Z]', field.data):
-            raise ValidationError("Password must contain at least one uppercase letter.")
+            raise ValidationError("La contraseña debe contener al menos una letra mayúscula")
         if not re.search(r'[a-z]', field.data):
-            raise ValidationError("Password must contain at least one lowercase letter.")
+            raise ValidationError("La contraseña debe contener al menos una letra minúscula")
         if not re.search(r'\d', field.data):
-            raise ValidationError("Password must contain at least one number.")
+            raise ValidationError("La contraseña debe contener al menos un número")
         if not re.search(r'[!@#$%^&*(),.?":{}|<>]', field.data):
-            raise ValidationError("Password must contain at least one special character.")
+            raise ValidationError("La contraseña debe contener al menos un carácter especial")

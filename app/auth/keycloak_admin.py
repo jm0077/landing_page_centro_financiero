@@ -57,6 +57,29 @@ class KeycloakAdminClient:
                 token=token_data
             )
 
+    def _parse_error_message(self, error_str):
+        """Traduce y formatea los mensajes de error comunes de Keycloak"""
+        error_mappings = {
+            "User exists with same username": "Ya existe un usuario con ese nombre de usuario",
+            "User exists with same email": "Ya existe un usuario con ese correo electrónico",
+            "Invalid username": "El nombre de usuario no es válido",
+            "Invalid email": "El correo electrónico no es válido",
+            "Password policy not met": "La contraseña no cumple con los requisitos de seguridad",
+            "Username contains invalid characters": "El nombre de usuario contiene caracteres no válidos"
+        }
+        
+        # Intenta extraer el mensaje de error del JSON si es posible
+        try:
+            error_dict = json.loads(error_str)
+            original_message = error_dict.get('errorMessage', '')
+            return error_mappings.get(original_message, original_message)
+        except:
+            # Si no es JSON, busca coincidencias directas
+            for eng, esp in error_mappings.items():
+                if eng in error_str:
+                    return esp
+            return "Error en el registro: " + error_str
+            
     def create_user(self, username, email, password, first_name, last_name):
         try:
             self._init_admin()
@@ -82,17 +105,19 @@ class KeycloakAdminClient:
             
             # Insert user in bank database
             if insert_user_in_bank(user_id):
-                logger.info(f"User {user_id} inserted in bank database successfully")
+                logger.info(f"Usuario {user_id} registrado exitosamente en la base de datos")
             else:
-                logger.error(f"Failed to insert user {user_id} in bank database")
+                logger.error(f"Error al insertar usuario {user_id} en la base de datos")
             
-            return True, "User created successfully, GCS folder created, and user inserted in bank database"
+            return True, "Usuario creado exitosamente"
         except KeycloakGetError as e:
-            logger.error(f"Keycloak error: {str(e)}")
-            return False, f"Keycloak error: {str(e)}"
+            error_msg = self._parse_error_message(str(e))
+            logger.error(f"Error de Keycloak: {error_msg}")
+            return False, error_msg
         except Exception as e:
-            logger.error(f"Unexpected error: {str(e)}", exc_info=True)
-            return False, f"Unexpected error: {str(e)}"
+            error_msg = self._parse_error_message(str(e))
+            logger.error(f"Error inesperado: {error_msg}", exc_info=True)
+            return False, error_msg
 
     def create_gcs_folder(self, folder_name):
         try:
