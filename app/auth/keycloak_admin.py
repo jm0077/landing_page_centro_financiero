@@ -80,7 +80,7 @@ class KeycloakAdminClient:
                     return esp
             return "Error en el registro: " + error_str
             
-    def create_user(self, username, email, password, first_name, last_name):
+    def create_user(self, username, email, password, first_name, last_name, dni):
         try:
             self._init_admin()
             new_user = self.keycloak_admin.create_user({
@@ -88,6 +88,9 @@ class KeycloakAdminClient:
                 "email": email,
                 "firstName": first_name,
                 "lastName": last_name,
+                "attributes": {
+                    "dni": dni
+                },
                 "enabled": True,
                 "credentials": [{
                     "type": "password",

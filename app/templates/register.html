@@ -58,6 +58,15 @@
                     {% endfor %}
                 {% endif %}
             </div>
+			<div class="mb-3">
+                {{ form.dni.label(class="form-label") }}
+                {{ form.dni(class="form-control") }}
+                {% if form.dni.errors %}
+                    {% for error in form.dni.errors %}
+                        <div class="invalid-feedback d-block">{{ error }}</div>
+                    {% endfor %}
+                {% endif %}
+            </div>
             <div class="mb-3">
                 {{ form.password.label(class="form-label") }}
                 {{ form.password(class="form-control") }}

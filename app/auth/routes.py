@@ -26,7 +26,8 @@ def register():
                 email=form.email.data,
                 password=form.password.data,
                 first_name=form.first_name.data,
-                last_name=form.last_name.data
+                last_name=form.last_name.data,
+                dni=form.dni.data
             )
             
             if success:

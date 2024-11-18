@@ -19,6 +19,10 @@ class RegistrationForm(FlaskForm):
     last_name = StringField('Apellido', validators=[
         DataRequired(message="El apellido es obligatorio")
     ])
+    dni = StringField('DNI', validators=[
+        DataRequired(message="El DNI es obligatorio"),
+        Length(min=8, max=8, message="El DNI debe tener exactamente 8 dígitos")
+    ])
     password = PasswordField('Contraseña', validators=[
         DataRequired(message="La contraseña es obligatoria"),
         Length(min=6, message="La contraseña debe tener al menos 6 caracteres")
@@ -38,3 +42,7 @@ class RegistrationForm(FlaskForm):
             raise ValidationError("La contraseña debe contener al menos un número")
         if not re.search(r'[!@#$%^&*(),.?":{}|<>]', field.data):
             raise ValidationError("La contraseña debe contener al menos un carácter especial")
+
+    def validate_dni(self, field):
+        if len(field.data) != 8 or not field.data.isdigit():
+            raise ValidationError("El DNI debe tener exactamente 8 dígitos")
