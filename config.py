@@ -24,7 +24,7 @@ class Config:
     DB_USER = 'jm_07'
     DB_PASS = '12345'
     DB_NAME = 'dashboard_db'
-    CLOUD_SQL_CONNECTION_NAME = 'quick-bonfire-441017-v2:southamerica-west1:my-mysql-instance'
+    CLOUD_SQL_CONNECTION_NAME = 'northern-hope-449920-t0:southamerica-west1:my-mysql-instance'
     SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{DB_USER}:{DB_PASS}@/{DB_NAME}?unix_socket=/cloudsql/{CLOUD_SQL_CONNECTION_NAME}"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 

@@ -1,0 +1,20 @@
+options:
+  logging: CLOUD_LOGGING_ONLY
+steps:
+# Paso 1: Construir el microservicio "landing-app"
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/northern-hope-449920-t0/landing-app', '.']
+  dir: './app'
+# Paso 2: Subir la imagen de "landing-app" al Container Registry
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/northern-hope-449920-t0/landing-app']
+# Paso 3: Desplegar el microservicio "landing-app"
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['run', 'deploy', 'landing-app-service', 
+         '--image', 'gcr.io/northern-hope-449920-t0/landing-app', 
+         '--add-cloudsql-instances', 'northern-hope-449920-t0:southamerica-west1:my-mysql-instance', 
+         '--platform', 'managed', 
+         '--region', 'southamerica-west1', 
+         '--allow-unauthenticated']
+images:
+- 'gcr.io/northern-hope-449920-t0/landing-app'
